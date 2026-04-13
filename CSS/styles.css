@@ -32,7 +32,10 @@ body{
   color: var(--text);
   background: var(--bg);
   line-height: 1.5;
-  overflow-x:hidden;
+}
+
+html, body {
+  overflow-x: hidden;
 }
 
 img{
