@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MB Dienstverlening – Wireframe</title>
+
+  <style>
+    :root{
+      --bg: #ececec;
+      --bg-soft: #f3f3f3;
+      --surface: #ffffff;
+      --surface-2: #f7f7f7;
+      --line: #d8d8d8;
+      --text: #2f2f2f;
+      --muted: #6c6c6c;
+      --placeholder-dark: #a7a7a7;
+      --placeholder-mid: #c4c4c4;
+      --placeholder-light: #dddddd;
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --container: 1400px;
+      --shadow: 0 6px 18px rgba(0,0,0,.04);
+    }
+
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html{
+      scroll-behavior: smooth;
+    }
+
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    img{
+      display: block;
+      max-width: 100%;
+    }
+
+    a{
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container{
+      width: min(var(--container), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .section{
+      padding: 5rem 0;
+    }
+
+    .section-head{
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-head h2{
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      max-width: 14ch;
+      font-weight: 700;
+    }
+
+    .section-head p{
+      max-width: 42ch;
+      color: var(--muted);
+    }
+
+    .eyebrow{
+      display: inline-block;
+      margin-bottom: .85rem;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 1.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--placeholder-mid);
+      color: #333;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn:hover{
+      background: #b7b7b7;
+    }
+
+    .placeholder-box{
+      background: var(--placeholder-mid);
+      border: 1px solid #b8b8b8;
+      color: #4a4a4a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+    }
+
+    .placeholder-image{
+      background: var(--placeholder-mid);
+      border: 1px solid #b8b8b8;
+      color: #4a4a4a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 220px;
+      font-weight: 700;
+      padding: 1rem;
+    }
+
+    .placeholder-icon{
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--placeholder-dark);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      margin: 0 auto 1rem;
+    }
+
+    /* HEADER */
+    .site-header{
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(236,236,236,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav{
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo{
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      font-weight: 700;
+    }
+
+    .logo-block{
+      width: 120px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--placeholder-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    .nav-links{
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      list-style: none;
+    }
+
+    .nav-links a{
+      color: var(--text);
+      font-weight: 600;
+      font-size: .95rem;
+    }
+
+    .nav-cta{
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .menu-toggle{
+      display: none;
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--surface);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .menu-toggle span{
+      width: 20px;
+      height: 2px;
+      background: #444;
+      border-radius: 999px;
+      display: block;
+    }
+
+    /* HERO */
+    .hero{
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--placeholder-light);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-inner{
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 2rem;
+      align-items: center;
+      min-height: 100vh;
+      padding: 7rem 0 3rem;
+    }
+
+    .hero-copy h1{
+      font-size: clamp(3rem, 6vw, 6rem);
+      line-height: .95;
+      margin-bottom: 1.4rem;
+      max-width: 9ch;
+    }
+
+    .hero-copy p{
+      color: var(--muted);
+      max-width: 44ch;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .hero-actions{
+      display: flex;
+      flex-wrap: wrap;
+      gap: .9rem;
+      margin-top: 1.2rem;
+    }
+
+    .hero-visual{
+      display: grid;
+      gap: 1rem;
+      justify-items: end;
+    }
+
+    .hero-image{
+      width: 100%;
+      min-height: 460px;
+      border-radius: var(--radius-xl);
+    }
+
+    .hero-panel{
+      width: min(360px, 100%);
+      padding: 1.25rem;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel h3{
+      font-size: 1rem;
+      margin-bottom: .75rem;
+    }
+
+    .hero-panel p{
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: .95rem;
+    }
+
+    .hero-points{
+      display: grid;
+      gap: .7rem;
+      list-style: none;
+    }
+
+    .hero-points li{
+      padding: .8rem;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: #555;
+      font-size: .95rem;
+    }
+
+    /* PAIN */
+    .pain-top{
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 3rem;
+    }
+
+    .pain-top h2{
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .pain-top p{
+      color: var(--muted);
+    }
+
+    .pain-cards{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .pain-card{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .pain-card h3{
+      font-size: 1.15rem;
+      margin-bottom: .75rem;
+    }
+
+    .pain-card p{
+      color: var(--muted);
+      font-size: .96rem;
+    }
+
+    .pain-answer{
+      margin-top: 2rem;
+      padding: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .pain-answer h2{
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: .8rem;
+    }
+
+    .pain-answer p{
+      color: var(--muted);
+      max-width: 58ch;
+      margin: 0 auto 1.2rem;
+    }
+
+    /* SERVICES */
+    .section-alt{
+      background: var(--bg-soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .services-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .service-card{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .service-icon{
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: var(--placeholder-dark);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3{
+      font-size: 1.2rem;
+      margin-bottom: .75rem;
+    }
+
+    .service-card p{
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .service-card ul{
+      list-style: none;
+      display: grid;
+      gap: .65rem;
+    }
+
+    .service-card li{
+      padding: .7rem .8rem;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: #575757;
+      font-size: .95rem;
+    }
+
+    /* PROJECTS */
+    .projects-grid{
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0,1fr));
+      gap: 1rem;
+    }
+
+    .project-card{
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .project-card.large{
+      grid-column: span 7;
+    }
+
+    .project-card.small{
+      grid-column: span 5;
+    }
+
+    .project-image{
+      min-height: 280px;
+    }
+
+    .project-content{
+      padding: 1.25rem;
+    }
+
+    .project-content h3{
+      font-size: 1.15rem;
+      margin-bottom: .45rem;
+    }
+
+    .project-content p{
+      color: var(--muted);
+      margin-bottom: .8rem;
+      font-size: .95rem;
+    }
+
+    .tag-row{
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .tag{
+      padding: .5rem .8rem;
+      border-radius: 999px;
+      background: var(--placeholder-light);
+      border: 1px solid var(--line);
+      font-size: .8rem;
+      font-weight: 700;
+      color: #555;
+    }
+
+    /* WHY */
+    .why-wrap{
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .why-copy{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .why-copy h2{
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      max-width: 12ch;
+    }
+
+    .why-copy p{
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      max-width: 50ch;
+    }
+
+    .why-points{
+      list-style: none;
+      display: grid;
+      gap: .75rem;
+    }
+
+    .why-points li{
+      padding: .9rem 1rem;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: #555;
+      font-weight: 600;
+    }
+
+    .stats-grid{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .stat{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong{
+      display: block;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      margin-bottom: .5rem;
+      color: #444;
+    }
+
+    .stat span{
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ABOUT */
+    .about-wrap{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .about-image{
+      min-height: 560px;
+      border-radius: var(--radius-xl);
+    }
+
+    .about-copy{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-copy h2{
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+      max-width: 12ch;
+    }
+
+    .about-copy p{
+      color: var(--muted);
+      margin-bottom: .9rem;
+    }
+
+    /* PROCESS */
+    .process-wrap{
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .process-left{
+      position: sticky;
+      top: 110px;
+      align-self: start;
+    }
+
+    .process-left h2{
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      max-width: 10ch;
+    }
+
+    .process-track{
+      display: grid;
+      gap: 1rem;
+    }
+
+    .process-card{
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .process-image{
+      min-height: 180px;
+      border-radius: 16px;
+    }
+
+    .process-card-content{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .process-card-content h3{
+      font-size: 1.3rem;
+      margin-bottom: .65rem;
+    }
+
+    .process-card-content p{
+      color: var(--muted);
+    }
+
+    /* REVIEWS */
+    .reviews-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .review{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .stars{
+      margin-bottom: 1rem;
+      color: #555;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+
+    .review p{
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .review strong{
+      display: block;
+      margin-bottom: .2rem;
+    }
+
+    .review span{
+      color: #777;
+      font-size: .95rem;
+    }
+
+    /* CTA */
+    .cta-box{
+      display: grid;
+      grid-template-columns: 1fr .9fr;
+      gap: 1rem;
+      align-items: stretch;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-description h2{
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      max-width: 12ch;
+    }
+
+    .cta-description p{
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+      max-width: 46ch;
+    }
+
+    .cta-img{
+      min-height: 320px;
+      border-radius: var(--radius-lg);
+    }
+
+    /* CONTACT */
+    .contact-wrap{
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 1rem;
+    }
+
+    .contact-card,
+    .form-card{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h2{
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+      max-width: 11ch;
+    }
+
+    .contact-card p{
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+      max-width: 42ch;
+    }
+
+    .contact-list{
+      list-style: none;
+      display: grid;
+      gap: .8rem;
+    }
+
+    .contact-list li{
+      padding: 1rem;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .contact-list strong{
+      display: block;
+      margin-bottom: .25rem;
+    }
+
+    .contact-list span{
+      color: var(--muted);
+    }
+
+    .form-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .9rem;
+    }
+
+    .field{
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+
+    .field.full{
+      grid-column: 1 / -1;
+    }
+
+    label{
+      font-size: .92rem;
+      font-weight: 700;
+      color: #444;
+    }
+
+    input,
+    textarea{
+      width: 100%;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+      border-radius: 14px;
+      padding: 1rem;
+      font: inherit;
+      color: #444;
+      outline: none;
+    }
+
+    textarea{
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    /* FOOTER */
+    .footer{
+      padding: 1.5rem 0 2.5rem;
+    }
+
+    .footer-inner{
+      border-top: 1px solid var(--line);
+      padding-top: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px){
+      .hero-inner,
+      .why-wrap,
+      .about-wrap,
+      .process-wrap,
+      .contact-wrap,
+      .cta-box{
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid{
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .project-card.large,
+      .project-card.small{
+        grid-column: auto;
+      }
+
+      .services-grid,
+      .reviews-grid{
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pain-cards{
+        grid-template-columns: 1fr;
+      }
+
+      .process-left{
+        position: static;
+      }
+    }
+
+    @media (max-width: 860px){
+      .menu-toggle{
+        display: flex;
+      }
+
+      .nav-links{
+        position: fixed;
+        top: 82px;
+        right: -100%;
+        width: min(84vw, 360px);
+        height: calc(100vh - 82px);
+        background: var(--surface);
+        border-left: 1px solid var(--line);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 2rem;
+        transition: .3s ease;
+        z-index: 999;
+      }
+
+      .nav-links.active{
+        right: 0;
+      }
+
+      .nav-cta > .btn{
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px){
+      .section{
+        padding: 4rem 0;
+      }
+
+      .section-head{
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .services-grid,
+      .reviews-grid,
+      .projects-grid,
+      .stats-grid,
+      .form-grid{
+        grid-template-columns: 1fr;
+      }
+
+      .process-card{
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions{
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn,
+      .form-card .btn{
+        width: 100%;
+      }
+
+      .footer-inner{
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .hero-image{
+        min-height: 320px;
+      }
+
+      .about-image{
+        min-height: 360px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#" class="logo">
+        <div class="logo-block">LOGO</div>
+        <span>MB Dienstverlening</span>
+      </a>
+
+      <ul class="nav-links" id="mobileMenu">
+        <li><a href="#diensten">Diensten</a></li>
+        <li><a href="#projecten">Projecten</a></li>
+        <li><a href="#over">Over MB</a></li>
+        <li><a href="#werkwijze">Werkwijze</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="#contact" class="btn">CTA</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <span class="eyebrow">Hero / Intro</span>
+            <h1>Jouw tuin. Ons vakmanschap.</h1>
+            <p>
+              Placeholder voor korte introductietekst over MB Dienstverlening en de belangrijkste waardepropositie.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#contact" class="btn">Primêre CTA</a>
+              <a href="#projecten" class="btn">Secundaire CTA</a>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+          
+
+            <aside class="hero-panel">
+              <h3>Info blok / USP’s</h3>
+              <p>
+                Placeholder voor extra uitleg of waarom klanten voor MB kiezen.
+              </p>
+              <ul class="hero-points">
+                <li>USP / voordeel 1</li>
+                <li>USP / voordeel 2</li>
+                <li>USP / voordeel 3</li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="pain-top">
+          <span class="eyebrow">Probleem / herkenning</span>
+          <h2>Een mooie tuin klinkt goed, maar waar begin je eigenlijk?</h2>
+          <p>
+            Placeholder voor korte inleidende tekst die inspeelt op herkenbare problemen of twijfels.
+          </p>
+        </div>
+
+        <div class="pain-cards">
+          <article class="pain-card">
+            <div class="placeholder-icon">ICOON</div>
+            <h3>Probleem / behoefte 1</h3>
+            <p>Placeholder tekst voor de eerste herkenbare situatie van de klant.</p>
+          </article>
+
+          <article class="pain-card">
+            <div class="placeholder-icon">ICOON</div>
+            <h3>Probleem / behoefte 2</h3>
+            <p>Placeholder tekst voor de tweede herkenbare situatie van de klant.</p>
+          </article>
+
+          <article class="pain-card">
+            <div class="placeholder-icon">ICOON</div>
+            <h3>Probleem / behoefte 3</h3>
+            <p>Placeholder tekst voor de derde herkenbare situatie van de klant.</p>
+          </article>
+        </div>
+
+        <div class="pain-answer">
+          <span class="eyebrow">Oplossing</span>
+          <h2>Daar komt MB Dienstverlening in beeld.</h2>
+          <p>
+            Placeholder voor een korte uitleg van de aanpak en hoe MB het probleem oplost.
+          </p>
+          <a href="#contact" class="btn">CTA</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="diensten">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Diensten</span>
+            <h2>Alles voor een tuin die klopt van begin tot eind.</h2>
+          </div>
+          <p>Placeholder voor korte ondersteunende tekst bij de diensten.</p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon">01</div>
+            <h3>Aanleg</h3>
+            <p>Placeholder tekst voor dienstomschrijving.</p>
+            <ul>
+              <li>Onderdeel / punt 1</li>
+              <li>Onderdeel / punt 2</li>
+              <li>Onderdeel / punt 3</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">02</div>
+            <h3>Renovatie</h3>
+            <p>Placeholder tekst voor dienstomschrijving.</p>
+            <ul>
+              <li>Onderdeel / punt 1</li>
+              <li>Onderdeel / punt 2</li>
+              <li>Onderdeel / punt 3</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">03</div>
+            <h3>Onderhoud</h3>
+            <p>Placeholder tekst voor dienstomschrijving.</p>
+            <ul>
+              <li>Onderdeel / punt 1</li>
+              <li>Onderdeel / punt 2</li>
+              <li>Onderdeel / punt 3</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projecten">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Projecten</span>
+            <h2>Inspiratie voor jouw tuin.</h2>
+          </div>
+          <p>Placeholder voor korte tekst bij de projectsectie.</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card large">
+            <div class="placeholder-image project-image">PROJECT AFBEELDING</div>
+            <div class="project-content">
+              <h3>Project titel</h3>
+              <p>Korte placeholder beschrijving van dit project.</p>
+              <div class="tag-row">
+                <span class="tag">Tag 1</span>
+                <span class="tag">Tag 2</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card small">
+            <div class="placeholder-image project-image">PROJECT AFBEELDING</div>
+            <div class="project-content">
+              <h3>Project titel</h3>
+              <p>Korte placeholder beschrijving van dit project.</p>
+              <div class="tag-row">
+                <span class="tag">Tag 1</span>
+                <span class="tag">Tag 2</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card small">
+            <div class="placeholder-image project-image">PROJECT AFBEELDING</div>
+            <div class="project-content">
+              <h3>Project titel</h3>
+              <p>Korte placeholder beschrijving van dit project.</p>
+              <div class="tag-row">
+                <span class="tag">Tag 1</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card large">
+            <div class="placeholder-image project-image">PROJECT AFBEELDING</div>
+            <div class="project-content">
+              <h3>Project titel</h3>
+              <p>Korte placeholder beschrijving van dit project.</p>
+              <div class="tag-row">
+                <span class="tag">Tag 1</span>
+                <span class="tag">Tag 2</span>
+                <span class="tag">Tag 3</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="why-wrap">
+          <div class="why-copy">
+            <span class="eyebrow">Waarom MB?</span>
+            <h2>Niet zomaar een tuin, maar een buitenruimte waar alles samenkomt.</h2>
+            <p>
+              Placeholder voor tekst die uitlegt waarom MB anders is dan anderen.
+            </p>
+
+            <ul class="why-points">
+              <li>USP / voordeel 1</li>
+              <li>USP / voordeel 2</li>
+              <li>USP / voordeel 3</li>
+              <li>USP / voordeel 4</li>
+            </ul>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat">
+              <strong>10+</strong>
+              <span>Placeholder statistiek</span>
+            </div>
+            <div class="stat">
+              <strong>100+</strong>
+              <span>Placeholder statistiek</span>
+            </div>
+            <div class="stat">
+              <strong>1</strong>
+              <span>Placeholder statistiek</span>
+            </div>
+            <div class="stat">
+              <strong>360°</strong>
+              <span>Placeholder statistiek</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="over">
+      <div class="container">
+        <div class="about-wrap">
+          <div class="placeholder-image about-image">PORTRET / FOTO EIGENAAR</div>
+
+          <div class="about-copy">
+            <span class="eyebrow">Over MB</span>
+            <h2>Wie zit er achter MB Dienstverlening</h2>
+            <p>Placeholder voor introductie over de eigenaar en het verhaal achter het bedrijf.</p>
+            <p>Placeholder voor achtergrond, visie en manier van werken.</p>
+            <p>Placeholder voor persoonlijke aanpak en onderscheidend vermogen.</p>
+
+            <div style="margin-top:1rem;">
+              <a href="#contact" class="btn">CTA</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="werkwijze">
+      <div class="container">
+        <div class="process-wrap">
+          <div class="process-left">
+            <span class="eyebrow">Werkwijze</span>
+            <h2>Zo werkt MB Dienstverlening</h2>
+          </div>
+
+          <div class="process-track">
+            <article class="process-card">
+              <div class="placeholder-image process-image">STAP AFBEELDING</div>
+              <div class="process-card-content">
+                <h3>01. Kennismaking</h3>
+                <p>Placeholder tekst voor stap 1 van het proces.</p>
+              </div>
+            </article>
+
+            <article class="process-card">
+              <div class="placeholder-image process-image">STAP AFBEELDING</div>
+              <div class="process-card-content">
+                <h3>02. Plan en voorstel</h3>
+                <p>Placeholder tekst voor stap 2 van het proces.</p>
+              </div>
+            </article>
+
+            <article class="process-card">
+              <div class="placeholder-image process-image">STAP AFBEELDING</div>
+              <div class="process-card-content">
+                <h3>03. Uitvoering</h3>
+                <p>Placeholder tekst voor stap 3 van het proces.</p>
+              </div>
+            </article>
+
+            <article class="process-card">
+              <div class="placeholder-image process-image">STAP AFBEELDING</div>
+              <div class="process-card-content">
+                <h3>04. Nazorg</h3>
+                <p>Placeholder tekst voor stap 4 van het proces.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Testimonials</span>
+            <h2>Dit is wat klanten over mij zeggen.</h2>
+          </div>
+          <p>Placeholder voor korte ondersteunende tekst.</p>
+        </div>
+
+        <div class="reviews-grid">
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>Placeholder quote van klant of reviewtekst.</p>
+            <strong>Naam klant</strong>
+            <span>Plaats</span>
+          </article>
+
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>Placeholder quote van klant of reviewtekst.</p>
+            <strong>Naam klant</strong>
+            <span>Plaats</span>
+          </article>
+
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>Placeholder quote van klant of reviewtekst.</p>
+            <strong>Naam klant</strong>
+            <span>Plaats</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-description">
+            <span class="eyebrow">CTA blok</span>
+            <h2>Klaar voor een tuin die echt bij je past?</h2>
+            <p>
+              Placeholder voor sterke call-to-action tekst richting contact of aanvraag.
+            </p>
+            <a href="#contact" class="btn">CTA</a>
+          </div>
+
+          <div class="placeholder-image cta-img">CTA AFBEELDING</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-wrap">
+          <div class="contact-card">
+            <span class="eyebrow">Contact</span>
+            <h2>Vertel kort wat je wilt laten maken.</h2>
+            <p>
+              Placeholder voor korte tekst bij het contactformulier.
+            </p>
+
+            <ul class="contact-list">
+              <li>
+                <strong>E-mail</strong>
+                <span>placeholder@email.nl</span>
+              </li>
+              <li>
+                <strong>Telefoon</strong>
+                <span>06 12 34 56 78</span>
+              </li>
+              <li>
+                <strong>Werkgebied</strong>
+                <span>Regio / omgeving</span>
+              </li>
+            </ul>
+          </div>
+
+          <form class="form-card">
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">Naam</label>
+                <input id="name" type="text" placeholder="Jouw naam" />
+              </div>
+
+              <div class="field">
+                <label for="email">E-mailadres</label>
+                <input id="email" type="email" placeholder="jij@email.nl" />
+              </div>
+
+              <div class="field">
+                <label for="phone">Telefoon</label>
+                <input id="phone" type="text" placeholder="06..." />
+              </div>
+
+              <div class="field">
+                <label for="subject">Onderwerp</label>
+                <input id="subject" type="text" placeholder="Onderwerp" />
+              </div>
+
+              <div class="field full">
+                <label for="message">Bericht</label>
+                <textarea id="message" placeholder="Typ hier je bericht..."></textarea>
+              </div>
+
+              <div class="field full">
+                <button type="submit" class="btn">Verstuur aanvraag</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© 2026 MB Dienstverlening</p>
+      <p>Footer placeholder tekst</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("active");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+      });
+    });
+  </script>
+
+</body>
+</html>

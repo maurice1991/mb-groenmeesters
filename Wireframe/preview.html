@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MB Dienstverlening</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f6f4ef;
+      --bg-soft: #efeae0;
+      --white: #ffffff;
+      --text: #1f241f;
+      --muted: #5f685f;
+      --line: rgba(31, 36, 31, 0.08);
+      --green-dark: #20372a;
+      --green: #365640;
+      --green-soft: #dce7da;
+      --accent: #97b87a;
+      --shadow: 0 10px 30px rgba(19, 28, 21, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --container: 1240px;
+    }
+
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html{
+      scroll-behavior: smooth;
+    }
+
+    body{
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+
+    img{
+      max-width: 100%;
+      display: block;
+    }
+
+    a{
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container{
+      width: min(var(--container), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .section{
+      padding: 5.5rem 0;
+    }
+
+    .eyebrow{
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow::before{
+      content: "";
+      width: 24px;
+      height: 1px;
+      background: var(--green);
+      opacity: .65;
+    }
+
+    .section-head{
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-head h2{
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      max-width: 12ch;
+    }
+
+    .section-head p{
+      max-width: 44ch;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .75rem;
+      min-height: 54px;
+      padding: 0 1.35rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: .25s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary{
+      background: var(--green-dark);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover{
+      transform: translateY(-2px);
+      background: #17291e;
+    }
+
+    .btn-secondary{
+      background: rgba(255,255,255,.12);
+      color: var(--white);
+      border-color: rgba(255,255,255,.18);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-secondary:hover{
+      background: rgba(255,255,255,.18);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost{
+      background: transparent;
+      color: var(--green-dark);
+      border-color: rgba(32,55,42,.14);
+    }
+
+    .btn-ghost:hover{
+      background: rgba(32,55,42,.04);
+      transform: translateY(-2px);
+    }
+
+    /* header */
+    .site-header{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1rem 0;
+      background: linear-gradient(to bottom, rgba(18, 27, 21, 0.45), rgba(18, 27, 21, 0.08));
+      backdrop-filter: blur(12px);
+    }
+
+    .nav{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .logo{
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: .02em;
+      color: var(--white);
+      z-index: 1002;
+    }
+
+    .logo-mark{
+      width: 42px;
+      aspect-ratio: 1;
+      border-radius: 14px;
+      background: linear-gradient(145deg, var(--green-dark), var(--green));
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+      font-weight: 800;
+    }
+
+    .nav-links{
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a{
+      color: var(--white);
+      font-weight: 600;
+      font-size: .96rem;
+      transition: .2s ease;
+    }
+
+    .nav-links a:hover{
+      opacity: .75;
+    }
+
+    .nav-cta{
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      z-index: 1002;
+    }
+
+    .menu-toggle{
+      display: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      z-index: 1002;
+    }
+
+    .menu-toggle span{
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      border-radius: 999px;
+      transition: .3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1){
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2){
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3){
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* hero */
+    .hero{
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: end;
+      overflow: hidden;
+      background:
+        linear-gradient(to right, rgba(16, 23, 18, .68), rgba(16, 23, 18, .22)),
+        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=80") center/cover no-repeat;
+    }
+
+    .hero::before{
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(18,27,21,.7), transparent 38%),
+        linear-gradient(to bottom, rgba(18,27,21,.18), transparent 20%);
+    }
+
+    .hero-inner{
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 8rem 0 3rem;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 2rem;
+      align-items: end;
+    }
+
+    .hero-copy{
+      max-width: 700px;
+      color: var(--white);
+    }
+
+    .hero-copy .eyebrow{
+      color: #dce7da;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-copy .eyebrow::before{
+      background: #dce7da;
+    }
+
+    .hero-copy h1{
+      font-size: clamp(3rem, 6vw, 6.5rem);
+      line-height: .95;
+      letter-spacing: -.04em;
+      max-width: 9ch;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-copy p{
+      font-size: clamp(1rem, 1.25vw, 1.15rem);
+      color: rgba(255,255,255,.84);
+      max-width: 42ch;
+      margin-bottom: 1.7rem;
+    }
+
+    .hero-actions{
+      display: flex;
+      flex-wrap: wrap;
+      gap: .9rem;
+    }
+
+    .hero-panel{
+      justify-self: end;
+      align-self: end;
+      max-width: 360px;
+      padding: 1.3rem;
+      border-radius: 26px;
+      background: rgba(255,255,255,.11);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(14px);
+      color: var(--white);
+    }
+
+    .hero-panel small{
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 700;
+      opacity: .78;
+      margin-bottom: .8rem;
+    }
+
+    .hero-panel p{
+      color: rgba(255,255,255,.88);
+      font-size: .97rem;
+    }
+
+    .hero-points{
+      display: grid;
+      gap: .8rem;
+      margin-top: 1rem;
+    }
+
+    .hero-points span{
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .96rem;
+    }
+
+    .hero-points span::before{
+      content: "•";
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .scroll-indicator{
+      position: absolute;
+      left: 50%;
+      bottom: 1.2rem;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: rgba(255,255,255,.8);
+      font-size: .85rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* intro strip */
+    .intro-strip{
+      margin-top: -3rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .intro-box{
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 1.4rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .intro-item{
+      padding: .8rem .9rem;
+      border-right: 1px solid var(--line);
+    }
+
+    .intro-item:last-child{
+      border-right: 0;
+    }
+
+    .intro-item strong{
+      display: block;
+      font-size: 1.5rem;
+      margin-bottom: .25rem;
+      color: var(--green-dark);
+    }
+
+    .intro-item span{
+      color: var(--muted);
+      font-size: .96rem;
+    }
+
+    /* pain cards */
+    .pain{
+      padding-top: 5rem;
+    }
+
+    .pain-top{
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 4rem;
+    }
+
+    .pain-top h2{
+      font-size: clamp(2rem, 4vw, 3.6rem);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .pain-top p{
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .pain-cards{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .pain-card{
+      position: relative;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 4rem 1.5rem 1.75rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: .25s ease;
+    }
+
+    .pain-card:hover{
+      transform: translateY(-6px);
+    }
+
+    .pain-icon{
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--green-dark);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(32,55,42,.2);
+    }
+
+    .pain-card h3{
+      font-size: 1.25rem;
+      margin-bottom: .75rem;
+    }
+
+    .pain-card p{
+      color: var(--muted);
+      font-size: .98rem;
+    }
+
+    .pain-answer{
+      margin-top: 2rem;
+      background: linear-gradient(145deg, var(--green-dark), #2c4734);
+      color: var(--white);
+      border-radius: 28px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .pain-answer p{
+      color: rgba(255,255,255,.84);
+      max-width: 60ch;
+      margin: 1rem auto 1.4rem;
+    }
+
+    /* services */
+    .services-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .service-card{
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+      transition: .25s ease;
+    }
+
+    .service-card:hover{
+      transform: translateY(-6px);
+    }
+
+    .service-icon{
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3{
+      font-size: 1.35rem;
+      margin-bottom: .7rem;
+    }
+
+    .service-card p{
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .service-card ul{
+      list-style: none;
+      display: grid;
+      gap: .65rem;
+    }
+
+    .service-card li{
+      color: #334036;
+      font-size: .97rem;
+      display: flex;
+      gap: .6rem;
+      align-items: flex-start;
+    }
+
+    .service-card li::before{
+      content: "✓";
+      color: var(--green);
+      font-weight: 800;
+      margin-top: .05rem;
+    }
+
+    /* projects */
+    .projects-grid{
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1rem;
+    }
+
+    .project-card{
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .project-card.large{
+      grid-column: span 7;
+    }
+
+    .project-card.small{
+      grid-column: span 5;
+    }
+
+    .project-card img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease;
+    }
+
+    .project-card:hover img{
+      transform: scale(1.06);
+    }
+
+    .project-overlay{
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(12,20,15,.72), transparent 55%);
+      z-index: 1;
+    }
+
+    .project-content{
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      z-index: 2;
+      color: var(--white);
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: end;
+    }
+
+    .project-content h3{
+      font-size: 1.35rem;
+      margin-bottom: .35rem;
+    }
+
+    .project-content p{
+      color: rgba(255,255,255,.82);
+      font-size: .95rem;
+    }
+
+    .tag-row{
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .85rem;
+    }
+
+    .tag{
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--white);
+      padding: .55rem .8rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(8px);
+    }
+
+    /* why us */
+    .why-wrap{
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .why-copy,
+    .stats-grid{
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .why-copy p{
+      color: var(--muted);
+      max-width: 54ch;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .why-points{
+      display: grid;
+      gap: .9rem;
+      list-style: none;
+    }
+
+    .why-points li{
+      display: flex;
+      gap: .8rem;
+      align-items: flex-start;
+      color: #344136;
+      font-weight: 600;
+    }
+
+    .why-points li::before{
+      content: "✓";
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      flex: 0 0 28px;
+      font-size: .9rem;
+      font-weight: 800;
+    }
+
+    .stats-grid{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      background: linear-gradient(180deg, #ffffff, #f5f8f4);
+    }
+
+    .stat{
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 1.2rem;
+      background: rgba(255,255,255,.7);
+    }
+
+    .stat strong{
+      display: block;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      color: var(--green-dark);
+      margin-bottom: .5rem;
+    }
+
+    .stat span{
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* about */
+    .about-wrap{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      align-items: stretch;
+    }
+
+    .about-image{
+      min-height: 560px;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .about-image img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-copy{
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-copy h2{
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+      max-width: 10ch;
+      margin-bottom: 1rem;
+    }
+
+    .about-copy p{
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* process */
+    .process-grid{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .process-card{
+      position: relative;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+    }
+
+    .process-number{
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--green-dark);
+      color: var(--white);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .process-card h3{
+      margin-bottom: .55rem;
+      font-size: 1.2rem;
+    }
+
+    .process-card p{
+      color: var(--muted);
+      font-size: .97rem;
+    }
+
+    /* reviews */
+    .reviews-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .review{
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .stars{
+      letter-spacing: .16em;
+      color: #7a9f5e;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .review p{
+      color: #364136;
+      margin-bottom: 1.15rem;
+    }
+
+    .review strong{
+      display: block;
+      margin-bottom: .15rem;
+    }
+
+    .review span{
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* cta */
+    .cta-box{
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(151,184,122,.18), transparent 28%),
+        linear-gradient(145deg, var(--green-dark), #263f2e);
+      color: var(--white);
+      border-radius: 34px;
+      padding: clamp(2rem, 5vw, 4rem);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2{
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 1;
+      max-width: 10ch;
+      margin-bottom: 1rem;
+    }
+
+    .cta-box p{
+      color: rgba(255,255,255,.84);
+      max-width: 48ch;
+      margin-bottom: 1.4rem;
+    }
+
+    /* contact */
+    .contact-wrap{
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 1rem;
+    }
+
+    .contact-card,
+    .form-card{
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card p{
+      color: var(--muted);
+      margin: 1rem 0 1.3rem;
+      max-width: 44ch;
+    }
+
+    .contact-list{
+      list-style: none;
+      display: grid;
+      gap: .9rem;
+    }
+
+    .contact-list li{
+      padding: 1rem;
+      border-radius: 16px;
+      background: #f8f7f3;
+      border: 1px solid rgba(31,36,31,.05);
+    }
+
+    .contact-list strong{
+      display: block;
+      margin-bottom: .25rem;
+    }
+
+    .form-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .9rem;
+    }
+
+    .field{
+      display: flex;
+      flex-direction: column;
+      gap: .45rem;
+    }
+
+    .field.full{
+      grid-column: 1 / -1;
+    }
+
+    label{
+      font-size: .92rem;
+      font-weight: 700;
+      color: #2e372f;
+    }
+
+    input,
+    textarea{
+      width: 100%;
+      border: 1px solid rgba(31,36,31,.09);
+      background: #fbfbf9;
+      border-radius: 16px;
+      padding: 1rem 1rem;
+      font: inherit;
+      color: var(--text);
+      outline: none;
+      transition: .2s ease;
+    }
+
+    input:focus,
+    textarea:focus{
+      border-color: rgba(54,86,64,.4);
+      box-shadow: 0 0 0 4px rgba(54,86,64,.08);
+      background: #fff;
+    }
+
+    textarea{
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    /* footer */
+    .footer{
+      padding: 1.5rem 0 2.75rem;
+    }
+
+    .footer-inner{
+      border-top: 1px solid rgba(31,36,31,.08);
+      padding-top: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* responsive */
+    @media (max-width: 1100px){
+      .hero-inner,
+      .why-wrap,
+      .about-wrap,
+      .contact-wrap{
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel{
+        justify-self: start;
+        max-width: 100%;
+      }
+
+      .projects-grid{
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .project-card.large,
+      .project-card.small{
+        grid-column: auto;
+      }
+
+      .services-grid,
+      .reviews-grid,
+      .process-grid{
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .intro-box{
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .intro-item:nth-child(2){
+        border-right: 0;
+      }
+
+      .pain-cards{
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    @media (max-width: 860px){
+      .menu-toggle{
+        display: flex;
+      }
+
+      .nav-links{
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: min(85vw, 380px);
+        height: 100vh;
+        background: rgba(20, 30, 23, 0.96);
+        backdrop-filter: blur(14px);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 2rem;
+        gap: 1.5rem;
+        transition: .35s ease;
+        box-shadow: -10px 0 30px rgba(0,0,0,.15);
+        z-index: 1001;
+      }
+
+      .nav-links.active{
+        right: 0;
+      }
+
+      .nav-links a{
+        font-size: 1.1rem;
+      }
+
+      .nav-cta .btn{
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px){
+      .hero{
+        min-height: 100svh;
+        align-items: end;
+      }
+
+      .hero-inner{
+        padding: 7rem 0 2rem;
+      }
+
+      .hero-copy h1{
+        max-width: 10ch;
+      }
+
+      .section{
+        padding: 4rem 0;
+      }
+
+      .section-head{
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .services-grid,
+      .reviews-grid,
+      .process-grid,
+      .projects-grid,
+      .form-grid,
+      .stats-grid,
+      .intro-box{
+        grid-template-columns: 1fr;
+      }
+
+      .intro-item{
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .intro-item:last-child{
+        border-bottom: 0;
+      }
+
+      .about-image{
+        min-height: 380px;
+      }
+
+      .footer-inner{
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .project-content{
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .hero-actions{
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .hero-actions .btn{
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#" class="logo">
+        <span class="logo-mark">MB</span>
+        <span>MB Dienstverlening</span>
+      </a>
+
+      <ul class="nav-links" id="mobileMenu">
+        <li><a href="#diensten">Diensten</a></li>
+        <li><a href="#projecten">Projecten</a></li>
+        <li><a href="#over">Over MB</a></li>
+        <li><a href="#werkwijze">Werkwijze</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-secondary">Plan een gesprek</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <span class="eyebrow">Ontwerp • Aanleg • Onderhoud</span>
+            <h1>Jouw tuin. Ons vakmanschap.</h1>
+            <p>
+              Van eerste idee tot complete realisatie. MB Dienstverlening maakt
+              buitenruimtes die rust geven, passen bij jouw woning en jarenlang mooi blijven.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary">Plan een gesprek</a>
+              <a href="#projecten" class="btn btn-secondary">Bekijk projecten</a>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <small>Waarom klanten voor MB kiezen</small>
+            <p>
+              Persoonlijke aanpak, oog voor detail en een tuin die niet alleen mooi is,
+              maar ook praktisch en toekomstgericht.
+            </p>
+
+            <div class="hero-points">
+              <span>Maatwerk voor iedere buitenruimte</span>
+              <span>Duurzame, doordachte oplossingen</span>
+              <span>Van ontwerp tot onderhoud</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="scroll-indicator">Scroll</div>
+    </section>
+
+    <section class="intro-strip">
+      <div class="container">
+        <div class="intro-box">
+          <div class="intro-item">
+            <strong>10+</strong>
+            <span>Jaar ervaring in groen en buitenwerk</span>
+          </div>
+          <div class="intro-item">
+            <strong>100%</strong>
+            <span>Persoonlijke aandacht per project</span>
+          </div>
+          <div class="intro-item">
+            <strong>Van A tot Z</strong>
+            <span>Ontwerp, aanleg en onderhoud onder één dak</span>
+          </div>
+          <div class="intro-item">
+            <strong>Duurzaam</strong>
+            <span>Met oog voor natuur, materiaal en toekomst</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pain">
+      <div class="container">
+        <div class="pain-top">
+          <span class="eyebrow">Herkenbaar?</span>
+          <h2>Een mooie tuin klinkt goed, maar waar begin je eigenlijk?</h2>
+          <p>
+            Veel mensen willen wel een sterke buitenruimte, maar zoeken vooral duidelijkheid,
+            vertrouwen en iemand die echt met ze meedenkt.
+          </p>
+        </div>
+
+        <div class="pain-cards">
+          <article class="pain-card">
+            <div class="pain-icon">?</div>
+            <h3>Ik wil een mooie tuin, maar weet niet waar ik moet beginnen</h3>
+            <p>
+              Je hebt ideeën, maar nog geen duidelijk plan of richting die echt past bij jouw woning en wensen.
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <div class="pain-icon">⌂</div>
+            <h3>Ik wil iets dat echt bij mijn huis en stijl past</h3>
+            <p>
+              Geen standaard oplossing, maar een buitenruimte die logisch voelt en mooi aansluit op de omgeving.
+            </p>
+          </article>
+
+          <article class="pain-card">
+            <div class="pain-icon">✓</div>
+            <h3>Ik wil kwaliteit, zonder gedoe of onduidelijkheid</h3>
+            <p>
+              Je zoekt vakwerk, heldere communicatie en iemand die verder kijkt dan alleen de uitvoering.
+            </p>
+          </article>
+        </div>
+
+        <div class="pain-answer">
+          <span class="eyebrow" style="color:#dce7da;">Onze aanpak</span>
+          <h2>Daar komt MB Dienstverlening in beeld.</h2>
+          <p>
+            We luisteren eerst naar jouw wensen, vertalen dat naar een sterk plan en zorgen daarna voor
+            een nette uitvoering. Zo ontstaat een tuin die klopt in uitstraling, gebruik en afwerking.
+          </p>
+          <a href="#contact" class="btn btn-secondary">Bespreek jouw ideeën</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="diensten">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Diensten</span>
+            <h2>Alles voor een tuin die klopt van begin tot eind.</h2>
+          </div>
+          <p>
+            Heldere diensten zorgen direct voor rust op de pagina. Bezoekers zien meteen wat je doet en waar je mee kunt helpen.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon">01</div>
+            <h3>Ontwerp</h3>
+            <p>
+              Een sterk tuinplan begint met een goed idee. We kijken naar sfeer, gebruik,
+              routing, materiaal en beplanting.
+            </p>
+            <ul>
+              <li>Tuinontwerp op maat</li>
+              <li>Indeling en sfeerplan</li>
+              <li>Advies over materialen en groen</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">02</div>
+            <h3>Aanleg</h3>
+            <p>
+              Van grondwerk tot afwerking: we zorgen voor een nette uitvoering en een resultaat
+              waar je direct van kunt genieten.
+            </p>
+            <ul>
+              <li>Bestrating en terrassen</li>
+              <li>Schuttingen en houtwerk</li>
+              <li>Beplanting en complete realisatie</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">03</div>
+            <h3>Onderhoud</h3>
+            <p>
+              Een mooie tuin blijft mooi met het juiste onderhoud. Periodiek of seizoensgericht,
+              precies wat jouw buitenruimte nodig heeft.
+            </p>
+            <ul>
+              <li>Snoei- en seizoensonderhoud</li>
+              <li>Verzorging van beplanting</li>
+              <li>Onderhoud op afspraak of vast schema</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projecten">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Projecten</span>
+            <h2>Werk dat direct laat zien wat voor niveau je levert.</h2>
+          </div>
+          <p>
+            Grote projectbeelden verkopen vaak sterker dan veel tekst. Laat daarom vooral sfeer, afwerking en resultaat zien.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card large">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=80" alt="Moderne tuin met terras">
+            <div class="project-overlay"></div>
+            <div class="project-content">
+              <div>
+                <h3>Moderne leeftuin in Elst</h3>
+                <p>Strakke lijnen, warme materialen en een indeling om echt in te leven.</p>
+                <div class="tag-row">
+                  <span class="tag">Ontwerp</span>
+                  <span class="tag">Aanleg</span>
+                </div>
+              </div>
+              <a href="#contact" class="btn btn-secondary">Project bespreken</a>
+            </div>
+          </article>
+
+          <article class="project-card small">
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80" alt="Groene tuin met beplanting">
+            <div class="project-overlay"></div>
+            <div class="project-content">
+              <div>
+                <h3>Groene tuin met karakter</h3>
+                <p>Natuurlijk, rustig en onderhoudsvriendelijk.</p>
+                <div class="tag-row">
+                  <span class="tag">Aanleg</span>
+                  <span class="tag">Onderhoud</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card small">
+            <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80" alt="Tuin met loungehoek">
+            <div class="project-overlay"></div>
+            <div class="project-content">
+              <div>
+                <h3>Stadstuin met loungehoek</h3>
+                <p>Compact, sfeervol en slim ingericht.</p>
+                <div class="tag-row">
+                  <span class="tag">Ontwerp</span>
+                  <span class="tag">Aanleg</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card large">
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1400&q=80" alt="Duurzame tuin met veel groen">
+            <div class="project-overlay"></div>
+            <div class="project-content">
+              <div>
+                <h3>Duurzame familietuin</h3>
+                <p>Een toekomstgerichte tuin waarin groen, comfort en gebruik samenkomen.</p>
+                <div class="tag-row">
+                  <span class="tag">Ontwerp</span>
+                  <span class="tag">Aanleg</span>
+                  <span class="tag">Onderhoud</span>
+                </div>
+              </div>
+              <a href="#contact" class="btn btn-secondary">Meer weten</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="why-wrap">
+          <div class="why-copy">
+            <span class="eyebrow">Waarom MB</span>
+            <h2>Niet zomaar een tuin, maar een buitenruimte waar alles samenkomt.</h2>
+            <p>
+              MB Dienstverlening combineert vakwerk met een persoonlijke benadering.
+              Geen standaard oplossing, maar een tuin die past bij jouw woning,
+              wensen en manier van leven.
+            </p>
+
+            <ul class="why-points">
+              <li>Persoonlijk contact en korte lijnen</li>
+              <li>Oog voor afwerking en detail</li>
+              <li>Duurzame keuzes waar mogelijk</li>
+              <li>Heldere aanpak van eerste gesprek tot oplevering</li>
+            </ul>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat">
+              <strong>10+</strong>
+              <span>Jaar praktijkervaring</span>
+            </div>
+            <div class="stat">
+              <strong>100+</strong>
+              <span>Projecten en opdrachten</span>
+            </div>
+            <div class="stat">
+              <strong>1</strong>
+              <span>Aanspreekpunt en persoonlijke aanpak</span>
+            </div>
+            <div class="stat">
+              <strong>360°</strong>
+              <span>Van idee tot onderhoud</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="over">
+      <div class="container">
+        <div class="about-wrap">
+          <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80" alt="Persoon achter MB Dienstverlening">
+          </div>
+
+          <div class="about-copy">
+            <span class="eyebrow">Over MB</span>
+            <h2>Een sterke buitenruimte begint met iemand die echt meedenkt.</h2>
+            <p>
+              Achter MB Dienstverlening staat een vakman met liefde voor groen, buitenwerk en kwaliteit.
+              Iemand die niet alleen uitvoert, maar ook verder kijkt dan de vraag zelf.
+            </p>
+            <p>
+              Het doel is simpel: buitenruimtes maken die goed voelen, logisch in elkaar zitten
+              en lang mooi blijven. Praktisch waar het moet, sfeervol waar het kan.
+            </p>
+            <p>
+              Hier kun je straks een echte foto en jullie eigen verhaal inzetten. Dat maakt de site direct veel sterker en persoonlijker.
+            </p>
+
+            <div style="margin-top:1rem;">
+              <a href="#contact" class="btn btn-primary">Kennismaken</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="werkwijze">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Werkwijze</span>
+            <h2>Een duidelijk proces geeft rust en vertrouwen.</h2>
+          </div>
+          <p>
+            Een heldere werkwijze maakt het makkelijker voor bezoekers om de stap naar contact te zetten.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <article class="process-card">
+            <div class="process-number">01</div>
+            <h3>Kennismaking</h3>
+            <p>We bespreken jouw wensen, stijl, budget en de mogelijkheden van de ruimte.</p>
+          </article>
+
+          <article class="process-card">
+            <div class="process-number">02</div>
+            <h3>Plan & ontwerp</h3>
+            <p>We vertalen jouw ideeën naar een heldere richting met materiaal- en sfeerkeuzes.</p>
+          </article>
+
+          <article class="process-card">
+            <div class="process-number">03</div>
+            <h3>Realisatie</h3>
+            <p>Van voorbereiding tot afwerking zorgen we voor een nette en professionele uitvoering.</p>
+          </article>
+
+          <article class="process-card">
+            <div class="process-number">04</div>
+            <h3>Onderhoud</h3>
+            <p>Ook na oplevering helpen we je graag om de tuin in topconditie te houden.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Reviews</span>
+            <h2>Social proof maakt je site direct geloofwaardiger.</h2>
+          </div>
+          <p>
+            Testimonials geven meteen vertrouwen en laten zien hoe anderen de samenwerking hebben ervaren.
+          </p>
+        </div>
+
+        <div class="reviews-grid">
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Fijne communicatie, strak werk en echt meegedacht in wat het beste paste bij onze tuin.”
+            </p>
+            <strong>Familie Peters</strong>
+            <span>Elst</span>
+          </article>
+
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Van eerste idee tot oplevering voelde het professioneel en duidelijk. Het resultaat is precies wat we hoopten.”
+            </p>
+            <strong>Linda & Mark</strong>
+            <span>Arnhem</span>
+          </article>
+
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>
+              “Netjes gewerkt, goede afwerking en een tuin waar we elke dag plezier van hebben.”
+            </p>
+            <strong>Jan de Vries</strong>
+            <span>Nijmegen</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-box">
+          <span class="eyebrow">Klaar voor de volgende stap?</span>
+          <h2>Klaar voor een tuin die echt bij je past?</h2>
+          <p>
+            Vertel kort wat je in gedachten hebt. Dan kijken we samen wat er mogelijk is
+            voor jouw woning, buitenruimte en wensen.
+          </p>
+          <a href="#contact" class="btn btn-secondary">Plan een gesprek</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-wrap">
+          <div class="contact-card">
+            <span class="eyebrow">Contact</span>
+            <h2>Vertel kort wat je wilt laten maken.</h2>
+            <p>
+              Of het nu gaat om een nieuw ontwerp, complete aanleg of onderhoud:
+              stuur een bericht en we nemen contact met je op.
+            </p>
+
+            <ul class="contact-list">
+              <li>
+                <strong>E-mail</strong>
+                info@mbdienstverlening.nl
+              </li>
+              <li>
+                <strong>Telefoon</strong>
+                06 12 34 56 78
+              </li>
+              <li>
+                <strong>Werkgebied</strong>
+                Elst, Arnhem, Nijmegen en omgeving
+              </li>
+            </ul>
+          </div>
+
+          <form class="form-card">
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">Naam</label>
+                <input id="name" type="text" placeholder="Jouw naam" />
+              </div>
+
+              <div class="field">
+                <label for="email">E-mailadres</label>
+                <input id="email" type="email" placeholder="jij@email.nl" />
+              </div>
+
+              <div class="field">
+                <label for="phone">Telefoon</label>
+                <input id="phone" type="text" placeholder="06..." />
+              </div>
+
+              <div class="field">
+                <label for="subject">Onderwerp</label>
+                <input id="subject" type="text" placeholder="Ontwerp / aanleg / onderhoud" />
+              </div>
+
+              <div class="field full">
+                <label for="message">Bericht</label>
+                <textarea id="message" placeholder="Vertel kort iets over je tuin en je wensen..."></textarea>
+              </div>
+
+              <div class="field full">
+                <button type="submit" class="btn btn-primary">Verstuur aanvraag</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© 2026 MB Dienstverlening</p>
+      <p>Ontwerp • Aanleg • Onderhoud</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("active");
+      mobileMenu.classList.toggle("active");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        menuToggle.classList.remove("active");
+        mobileMenu.classList.remove("active");
+      });
+    });
+  </script>
+
+</body>
+</html>
