@@ -378,24 +378,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Contact form feedback
-const params = new URLSearchParams(window.location.search);
-const statusBox = document.getElementById("form-status");
 
-if (statusBox) {
-  const status = params.get("status");
+  const form = document.getElementById("contact-form");
+  const submitBtn = document.getElementById("submit-btn");
+  const statusBox = document.getElementById("form-status");
 
-  if (status === "success") {
-    statusBox.classList.add("is-visible", "success");
-    statusBox.innerHTML = "Bedankt! Je bericht is succesvol verzonden. We nemen zo snel mogelijk contact met je op.";
+  function showStatus(type, message) {
+    statusBox.className = "form-status show " + type;
+    statusBox.textContent = message;
   }
 
-  if (status === "error") {
-    statusBox.classList.add("is-visible", "error");
-    statusBox.innerHTML = "Er ging iets mis bij het verzenden van je bericht. Probeer het opnieuw of neem telefonisch contact op.";
+  function clearStatus() {
+    statusBox.className = "form-status";
+    statusBox.textContent = "";
   }
 
-  if (status) {
-    const cleanUrl = window.location.pathname + window.location.hash;
-    window.history.replaceState({}, document.title, cleanUrl);
-  }
-}
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    clearStatus();
+
+    submitBtn.classList.add("is-loading");
+
+    const formData = new FormData(form);
+
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+        throw new Error("Verzenden mislukt");
+      }
+
+      showStatus(
+        "success",
+        "Bedankt! Je bericht is succesvol verzonden. We nemen zo snel mogelijk contact met je op."
+      );
+
+      form.reset();
+    } catch (error) {
+      showStatus(
+        "error",
+        "Er ging iets mis bij het verzenden van je bericht. Probeer het opnieuw of neem direct contact met ons op."
+      );
+    } finally {
+      submitBtn.classList.remove("is-loading");
+    }
+  });

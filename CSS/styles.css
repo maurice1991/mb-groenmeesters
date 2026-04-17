@@ -1953,22 +1953,22 @@ textarea{
   margin-bottom: 1.25rem;
   padding: 1rem 1.25rem;
   border-radius: 18px;
+  border: 1px solid transparent;
   font-size: 0.98rem;
   line-height: 1.5;
   font-weight: 500;
-  border: 1px solid transparent;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  animation: fadeSlideIn 0.35s ease;
+  animation: statusFade 0.3s ease;
 }
 
-.form-status.is-visible {
+.form-status.show {
   display: block;
 }
 
 .form-status.success {
   background: var(--green-soft);
   color: var(--green-dark);
-  border-color: rgba(54, 110, 74, 0.18);
+  border-color: rgba(58, 125, 78, 0.18);
 }
 
 .form-status.error {
@@ -1977,7 +1977,45 @@ textarea{
   border-color: rgba(181, 58, 58, 0.18);
 }
 
-@keyframes fadeSlideIn {
+.submit-btn {
+  position: relative;
+  min-width: 220px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.btn-spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  display: none;
+  animation: spin 0.8s linear infinite;
+}
+
+.submit-btn.is-loading .btn-spinner {
+  display: inline-block;
+}
+
+.submit-btn.is-loading .btn-text {
+  opacity: 0.85;
+}
+
+.submit-btn.is-loading {
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes statusFade {
   from {
     opacity: 0;
     transform: translateY(-8px);

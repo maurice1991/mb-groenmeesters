@@ -630,7 +630,9 @@
                 </ul>
          </div>
 
- <form class="form-card reveal fade-right" action="send.php" method="POST">
+<div id="form-status" class="form-status" aria-live="polite"></div>
+
+<form class="form-card reveal fade-right" id="contact-form">
   <div class="form-grid">
     <div class="field">
       <label for="name">Naam</label>
@@ -667,9 +669,11 @@
     </div>
 
     <div class="field full">
-      <button type="submit" class="btn btn-primary">Verstuur aanvraag</button>
+      <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">
+        <span class="btn-text">Verstuur aanvraag</span>
+        <span class="btn-spinner" aria-hidden="true"></span>
+      </button>
     </div>
-    <div id="form-status" class="form-status" aria-live="polite"></div>
   </div>
 </form>
         </div>
