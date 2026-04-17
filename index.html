@@ -546,29 +546,29 @@
           <article class="review reveal fade-up delay-1">
             <div class="stars">★★★★★</div>
             <p>
-              “Fijne communicatie, strak werk en echt meegedacht in wat het beste paste bij onze tuin.”
+              “Ik heb met Maurice samengewerkt aan diverse projecten. Maurice is een zeer gedreven en creatieve hovenier die altijd oog heeft voor detail. <br> Zijn vermogen om onder hoge druk rustig te blijven, altijd actief en strak met tijdstip en afspraken te zijn, maakt hem een waardevolle collega. <br>Ik beveel Maurice van harte aan!”
             </p>
-            <strong>Familie Peters</strong>
-            <span>Elst</span>
+            <strong>Ziggy Cuick</strong>
+            <span>Nijmegen</span>
           </article>
 
           <article class="review reveal fade-up delay-2">
             <div class="stars">★★★★★</div>
             <p>
-              “Van eerste idee tot oplevering voelde het professioneel en duidelijk. Het resultaat is precies wat we hoopten.”
+              “Enthousiaste tuinman die vlot en pragmatisch te werk gaat.”
             </p>
-            <strong>Linda & Mark</strong>
-            <span>Arnhem</span>
+            <strong>Wouter Stevens</strong>
+            <span>Nijmegen</span>
           </article>
 
-          <article class="review reveal fade-up delay-3">
+          <!-- <article class="review reveal fade-up delay-3">
             <div class="stars">★★★★★</div>
             <p>
               “Netjes gewerkt, goede afwerking en een tuin waar we elke dag plezier van hebben.”
             </p>
             <strong>Jan de Vries</strong>
             <span>Nijmegen</span>
-          </article>
+          </article> -->
         </div>
       </div>
     </section>
@@ -630,47 +630,48 @@
                 </ul>
          </div>
 
-          <form class="form-card reveal fade-right">
-            <div class="form-grid">
-             <div class="field">
-                <label for="name">Naam</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-user"></i>
-                        <input id="name" type="text" placeholder="Jouw naam" />
-                    </div>
-                </div>
+ <form class="form-card reveal fade-right" action="send.php" method="POST">
+  <div class="form-grid">
+    <div class="field">
+      <label for="name">Naam</label>
+      <div class="input-wrapper">
+        <i class="fa-solid fa-user"></i>
+        <input id="name" name="name" type="text" placeholder="Jouw naam" required />
+      </div>
+    </div>
 
-                <div class="field">
-                <label for="email">E-mailadres</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input id="email" type="email" placeholder="jij@email.nl" />
-                    </div>
-                </div>
+    <div class="field">
+      <label for="email">E-mailadres</label>
+      <div class="input-wrapper">
+        <i class="fa-solid fa-envelope"></i>
+        <input id="email" name="email" type="email" placeholder="jij@email.nl" required />
+      </div>
+    </div>
 
-                <div class="field">
-                <label for="phone">Telefoon</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-phone"></i>
-                        <input id="phone" type="text" placeholder="06..." />
-                    </div>
-                </div>
+    <div class="field">
+      <label for="phone">Telefoon</label>
+      <div class="input-wrapper">
+        <i class="fa-solid fa-phone"></i>
+        <input id="phone" name="phone" type="text" placeholder="06..." />
+      </div>
+    </div>
 
-              <div class="field">
-                <label for="subject">Onderwerp</label>
-                <input id="subject" type="text" placeholder="Aanleg/ Renovatie / onderhoud" />
-              </div>
+    <div class="field">
+      <label for="subject">Onderwerp</label>
+      <input id="subject" name="subject" type="text" placeholder="Aanleg / Renovatie / Onderhoud" />
+    </div>
 
-              <div class="field full">
-                <label for="message">Bericht</label>
-                <textarea id="message" placeholder="Vertel kort iets over je tuin en je wensen..."></textarea>
-              </div>
+    <div class="field full">
+      <label for="message">Bericht</label>
+      <textarea id="message" name="message" placeholder="Vertel kort iets over je tuin en je wensen..." required></textarea>
+    </div>
 
-              <div class="field full">
-                <button type="submit" class="btn btn-primary">Verstuur aanvraag</button>
-              </div>
-            </div>
-          </form>
+    <div class="field full">
+      <button type="submit" class="btn btn-primary">Verstuur aanvraag</button>
+    </div>
+    <div id="form-status" class="form-status" aria-live="polite"></div>
+  </div>
+</form>
         </div>
       </div>
     </section>

@@ -375,3 +375,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+
+
+// Contact form feedback
+const params = new URLSearchParams(window.location.search);
+const statusBox = document.getElementById("form-status");
+
+if (statusBox) {
+  const status = params.get("status");
+
+  if (status === "success") {
+    statusBox.classList.add("is-visible", "success");
+    statusBox.innerHTML = "Bedankt! Je bericht is succesvol verzonden. We nemen zo snel mogelijk contact met je op.";
+  }
+
+  if (status === "error") {
+    statusBox.classList.add("is-visible", "error");
+    statusBox.innerHTML = "Er ging iets mis bij het verzenden van je bericht. Probeer het opnieuw of neem telefonisch contact op.";
+  }
+
+  if (status) {
+    const cleanUrl = window.location.pathname + window.location.hash;
+    window.history.replaceState({}, document.title, cleanUrl);
+  }
+}

@@ -1946,3 +1946,44 @@ textarea{
     opacity: 1 !important;
   }
 }
+
+/*Contact form*/
+.form-status {
+  display: none;
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.25rem;
+  border-radius: 18px;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  font-weight: 500;
+  border: 1px solid transparent;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  animation: fadeSlideIn 0.35s ease;
+}
+
+.form-status.is-visible {
+  display: block;
+}
+
+.form-status.success {
+  background: var(--green-soft);
+  color: var(--green-dark);
+  border-color: rgba(54, 110, 74, 0.18);
+}
+
+.form-status.error {
+  background: rgba(181, 58, 58, 0.08);
+  color: #7a2323;
+  border-color: rgba(181, 58, 58, 0.18);
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
